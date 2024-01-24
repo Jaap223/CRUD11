@@ -21,6 +21,7 @@ class UpdateBoek extends Database
          
         } catch (PDOException $e) {
             return $e->getMessage();
+            
         }
     }
 }

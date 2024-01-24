@@ -57,26 +57,21 @@ class Product extends Database
         }
     }
 
-    public function updateProduct($product_id, $product_name, $price, $stock)
+    public function updateProduct($product_name, $category_id, $price, $stock_quantity)
     {
         try {
-
-            $sql = "UPDATE Products SET product_name = :product_name, price = :price, stock_quantity = :stock WHERE product_id = :product_id";
+            $sql = "UPDATE Products SET product_name = :product_name, category_id = :category_id, price = :price, stock_quantity = :stock_quantity WHERE product_name = :product_name";
 
             $stmt = $this->connect()->prepare($sql);
 
-            $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
             $stmt->bindParam(':product_name', $product_name, PDO::PARAM_STR);
+            $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT);
             $stmt->bindParam(':price', $price, PDO::PARAM_INT);
-            $stmt->bindParam(':stock', $stock, PDO::PARAM_INT);
+            $stmt->bindParam(':stock_quantity', $stock_quantity, PDO::PARAM_INT);
 
-            $rowCount = $stmt->execute();
-
-            return $rowCount;
+            return $stmt->execute();
         } catch (PDOException $e) {
-            
-            
-            throw new Exception("Error met het updaten van een product " .  $e->getMessage());
+            throw new Exception("Error updating product: " . $e->getMessage());
         }
     }
 }
@@ -97,28 +92,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $product2 = $productIn->addProduct($product_name, $category_id, $price, $stock_quantity);
 
         if ($product2 > 0) {
-            $pMessage = 'Product inserted';
+            $uMes = 'Product inserted';
         } else {
-            $pMessage = 'Product insertion failed';
+            $uMes = 'Product insertion failed';
         }
     }
 
     if (isset($_POST['updateProduct'])) {
-        $product_id = $_POST['product_id'];
+
         $product_name = $_POST['product_name'];
+        $category_id = $_POST['category_id'];
         $price = $_POST['price'];
         $stock_quantity = $_POST['stock_quantity'];
 
-        
-        $upProduct = new Product();
-        $product3 = $upProduct->updateProduct($product_id, $product_name, $price, $stock_quantity);
+        $productU = new Product();
+        $product3 = $productU->updateProduct($product_name, $category_id, $price, $stock_quantity);
 
         if ($product3 > 0) {
-            $uMes = 'Product Updated';
+            $uMes = 'Product updated';
         } else {
-            $uMes = 'Product not updated';
+            $uMes = 'Product update failed';
         }
     }
+
 
     // Checkt of de action bestaat en controleert de deleteProduct functie en verwijdert vervolgens een record uit de tabel 
     if (isset($_POST['action']) && ($_POST['action'] == 'deleteProduct')) {
@@ -159,25 +155,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <section class="formR">
     <form method="post">
-        <label for="product_name">Product_name</label>
-        <input type="text" name="product_name" id="product_name">
 
-        <label for="category_id">category_id</label>
-        <input type="text" name="category_id" id="category_id">
+        <form method="post">
+            <label for="product_name">Product_name</label>
+            <input type="text" name="product_name" id="product_name">
 
-        <label for="price">price</label>
-        <input type="text" name="price" id="price">
+            <label for="category_id">category_id</label>
+            <input type="text" name="category_id" id="category_id">
 
-        <label for="stock_quantity">stock_quantity</label>
-        <input type="text" name="stock_quantity" id="stock_quantity">
-        
-        
-        <input type="hidden" name="product_id" value="<?php echo isset($_POST['product_id']) ? $_POST['product_id'] : ''; ?>">
+            <label for="price">price</label>
+            <input type="text" name="price" id="price">
 
-        <input type="submit" name="updateProduct" value="updateProduct">
-    </form>
+            <label for="stock_quantity">stock_quantity</label>
+            <input type="text" name="stock_quantity" id="stock_quantity">
 
-    <a href="Categoriess.php">Categoriess</a>
+
+
+
+            <input type="submit" name="updateProduct" value="updateProduct">
+        </form>
+
+        <a href="Categoriess.php">Categoriess</a>
 </section>
 
 <table class="tab2">

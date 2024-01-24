@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $datum = isset($_POST['datum']) ? $_POST['datum'] : '';
         $tijd = isset($_POST['tijd']) ? $_POST['tijd'] : '';
     
-        echo "Debug: Boek ID: $boek_id, Status: $status, Datum: $datum, Tijd: $tijd";
+       
         $result = $updateB->BoekUpdaten($boek_id, $status, $datum, $tijd);
     
         if ($result > 0) {
