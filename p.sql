@@ -1,24 +1,24 @@
-CREATE TABLE Categories (
-    category_id INT PRIMARY KEY,
+CREATE TABLE Categoriess (
+    category_id INT PRIMARY KEY AUTO_INCREMENT,
     category_name VARCHAR(255)
 );
 
 CREATE TABLE Customers (
-    customer_id INT PRIMARY KEY,
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
     customer_name VARCHAR(255),
     email VARCHAR(255),
     phone_number VARCHAR(15)
 );
 
 CREATE TABLE Orders (
-    order_id INT PRIMARY KEY,
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
     customer_id INT,
     order_date DATE,
     FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
 
 CREATE TABLE Products (
-    product_id INT PRIMARY KEY,
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
     product_name VARCHAR(255),
     category_id INT,
     price DECIMAL(10, 2),
@@ -27,7 +27,7 @@ CREATE TABLE Products (
 );
 
 CREATE TABLE OrderDetails (
-    order_id INT,
+    order_id INT AUTO_INCREMENT,
     product_id INT,
     quantity INT,
     PRIMARY KEY (order_id, product_id),
@@ -75,8 +75,3 @@ VALUES
     (2, 2, 1),
     (3, 6, 2);
 
-
-    1
-    SELECT product_name
-FROM Products 
-WHERE stock_quantity = 0;

@@ -1,20 +1,31 @@
 * {
-    Font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
     font-size: 18px;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     background-color: #f4f4f4;
 }
+
 .formR, .formR1 {
     max-width: 400px;
-    margin: 0 auto;
+    margin: 20px auto; /* Center the form and add spacing */
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(43, 22, 152);
+    float: left;
+    margin-right: 20px;
+}
+
+/* Add clearfix to clear floats */
+.container::after {
+    content: "";
+    clear: both;
+    display: table;
 }
 
 .formR label,
@@ -44,6 +55,7 @@ body {
 .formR1 input[type="submit"]:hover {
     background-color: #8a2be2;
 }
+
 .mainNav {
     font-size: 22px;
     background-color: rgb(43, 22, 152);
@@ -63,40 +75,22 @@ body {
     padding: 8px 15px;
     border-radius: 5px;
 }
-.tableS {
+
+.tableS, .tab2 {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-.tableS th, .tableS td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.tableS th {
-    background-color: #f2f2f2;
-}
-
-.delete-btn {
-    background-color: #2f97d3;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-.tab2 {
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 20px;
-}
-
+.tableS th, .tableS td,
 .tab2 th, .tab2 td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+}
+
+.tableS th, .tab2 th {
+    background-color: #f2f2f2;
 }
 
 .tab2 th {
@@ -107,30 +101,30 @@ body {
     background-color: #f5f5f5;
 }
 
-.tab2 button {
+.delete-btn, .tab2 button {
     background-color: #2f97d3;
-    color: white;
+    color: #fff;
     border: none;
     padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.tab2 button {
+    font-size: 12px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 12px;
-    cursor: pointer;
 }
 
 .tab2 button:hover {
     background-color: #2f97d3;
 }
-@media screen and (max-width: 600px) {
-    .formR,
-    .formR1 {
-        max-width: 100%;
-    }
-}
 
-@media screen and (max-width: 768px) {
-    .mainNav {
-        font-size: 18px;
+@media screen and (max-width: 600px) {
+    .formR, .formR1,
+    .tableS, .tab2 {
+        max-width: 100%;
+        float: none; 
     }
 }
