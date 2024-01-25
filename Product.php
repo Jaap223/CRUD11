@@ -27,7 +27,6 @@ class Product extends Database
 
 
 
-
     public function deleteProduct($product_id)
     {
         try {
@@ -129,10 +128,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $delMessag = 'Deletion not succesfull';
         }
     }
+
+
 }
 
 ?>
-
+<br>
 <section class="formR">
     <form method="post">
         <label for="product_name">Product_name</label>

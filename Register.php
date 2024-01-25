@@ -39,6 +39,7 @@ $register = new Register();
 
 if (isset($_POST['Register'])) {
     $message = $register->Register(
+        
         $_POST['naam'],
         $_POST['wachtwoord'],
         $_POST['adres'],
