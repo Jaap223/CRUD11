@@ -69,26 +69,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </section>
 
 
+<section class="categories-table">
+    <table>
+        <thead>
+            <tr>
+                <th>Category ID</th>
+                <th>Category Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            try {
+                $categories = $addCat->getCat();
 
-<?php 
-$inCat = '';
-$addCat = new Categoriess();
-
-foreach ($category as $cat) {
-
-  
-    echo "<td>{$product['category_id']}</td>";
-    echo "<td>{$product['category_name']}</td>";
-    echo "<td>
-            <form method='post' action='{$_SERVER['PHP_SELF']}'>
-                <input type='hidden' name='product_id' value='{$product['product_id']}'>
-                <input type='hidden' name='action' value='deleteProduct'>
-                <button type='submit'>Delete</button>
-            </form>
-          </td>";
-    echo "</tr>";
-}
-}
-
-
-?>
+                foreach ($categories as $cat) {
+                    echo "<tr>";
+                    echo "<td>{$cat['category_id']}</td>";
+                    echo "<td>{$cat['category_name']}</td>";
+                    echo "<td>
+                            <form method='post' action='{$_SERVER['PHP_SELF']}'>
+                                <input type='hidden' name='category_id' value='{$cat['category_id']}'>
+                                <input type='hidden' name='action' value='deleteCategory'>
+                                <button type='submit'>Delete</button>
+                            </form>
+                          </td>";
+                    echo "</tr>";
+                }
+            } catch (Exception $e) {
+                echo "Error fetching categories: " . $e->getMessage();
+            }
+            
+            ?>
+        </tbody>
+    </table>
+</section>
