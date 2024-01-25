@@ -1,31 +1,20 @@
 * {
-    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+    Font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
     font-size: 18px;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     background-color: #f4f4f4;
 }
-
 .formR, .formR1 {
     max-width: 400px;
-    margin: 20px auto; /* Center the form and add spacing */
+    margin: 0 auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(43, 22, 152);
-    float: left;
-    margin-right: 20px;
-}
-
-/* Add clearfix to clear floats */
-.container::after {
-    content: "";
-    clear: both;
-    display: table;
 }
 
 .formR label,
@@ -55,7 +44,6 @@ body {
 .formR1 input[type="submit"]:hover {
     background-color: #8a2be2;
 }
-
 .mainNav {
     font-size: 22px;
     background-color: rgb(43, 22, 152);
@@ -94,7 +82,7 @@ body {
 }
 
 .tab2 th {
-    background-color: #852222;
+    background-color: #342285;
 }
 
 .tab2 tr:hover {
@@ -122,9 +110,14 @@ body {
 }
 
 @media screen and (max-width: 600px) {
-    .formR, .formR1,
-    .tableS, .tab2 {
+    .formR,
+    .formR1 {
         max-width: 100%;
-        float: none; 
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .mainNav {
+        font-size: 18px;
     }
 }

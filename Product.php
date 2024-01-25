@@ -26,6 +26,8 @@ class Product extends Database
     }
 
 
+
+
     public function deleteProduct($product_id)
     {
         try {
@@ -181,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <table class="tab2">
     <h2>Producten</h2>
     <tr>
-        <th>ProductID</th>
+        <!-- <th>ProductID</th> -->
         <th>Product Name</th>
         <th>Category ID</th>
         <th>Price</th>
@@ -195,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     foreach ($productData as $product) {
         echo "<tr>";
-        echo "<td>{$product['product_id']}</td>";
+        // echo "<td>{$product['product_id']}</td>";
         echo "<td>{$product['product_name']}</td>";
         echo "<td>{$product['category_id']}</td>";
         echo "<td>{$product['price']}</td>";
