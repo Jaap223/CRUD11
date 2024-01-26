@@ -34,10 +34,6 @@ CREATE TABLE OrderDetails (
     FOREIGN KEY (order_id) REFERENCES Orders(order_id),
     FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
-
-
-
-
 INSERT INTO Categoriess (category_id, category_name)
 VALUES
     (1, 'Electronics'),

@@ -5,6 +5,7 @@ require_once 'head/Head.php';
 
 class Categoriess extends Database
 {
+    //Voegt een category toe in de tabek=l
     public function addCat($category_id, $category_name)
     {
         try {
@@ -20,6 +21,7 @@ class Categoriess extends Database
         }
     }
 
+    //Selecteert alles vanuit de table categoriess
     public function getCat()
     {
         try {
@@ -32,27 +34,42 @@ class Categoriess extends Database
             throw new Exception("Error " . $e->getMessage());
         }
     }
-
+    //Verwijdert een geselecteerde row uit de tabel
     public function deleteCategory($category_id)
     {
         try {
             $sql = "DELETE FROM Categoriess WHERE category_id = :category_id";
             $stmt = $this->connect()->prepare($sql);
-
             $stmt->bindParam(':category_id', $category_id, PDO::PARAM_INT);
-
             $stmt->execute();
-            return $stmt->rowCount(); 
+            return $stmt->rowCount();
         } catch (PDOException $e) {
             throw new Exception("Deleting category: " . $e->getMessage());
+        }
+    }
+//Update een row 
+    public function updateCat($category_id, $category_name)
+    {
+        try {
+            $sql = "UPDATE Categoriess SET category_name = :category_name WHERE category_id = :category_id";
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->bindParam(":category_name", $category_name, PDO::PARAM_STR);
+            $stmt->bindParam(":category_id", $category_id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Exception("error" . $e->getMessage());
         }
     }
 }
 
 $inCat = '';
 $deCat = '';
+$uCat = '';
 $addCat = new Categoriess();
 $delCat = new Categoriess();
+$upCat = new Categoriess();
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -82,10 +99,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $deCat = 'failed to delete a category';
         }
     }
+
+    if (isset($_POST['updateCat'])) {
+        $category_id = $_POST['category_id'];
+        $category_name = $_POST['category_name'];
+
+        $upCat = new Categoriess();
+        $upcat2 = $upCat->updateCat($category_id, $category_name);
+
+        if ($upcat2 > 0) {
+            $uCat = "category updated";
+        } else {
+            $uCat = "failed to update category.";
+        }
+    }
+    
 }
 ?>
 
 <section class="formR">
+    <h2>Add category</h2>
     <form method="post">
         <label for="category_id">category_id</label>
         <input type="text" name="category_id" id="category_id">
@@ -98,10 +131,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <a href="Categoriess.php">Categoriess</a>
 </section>
+
 <br>
 
+
 <section class="formR">
-    <table>
+
+    <form method="post">
+        <h2>Update category</h2>
+        <label for="category_id">Category_id</label>
+        <input type="text" name="category_id" id="category_id">
+        <label for="category_name">Category_name</label>
+        <input type="text" name="category_name" id="category_name">
+
+        <input type="submit" name="updateCat" value="updateCat">
+    </form>
+</section>
+<br>
+
+
+    <table class="tab2">
         <thead>
             <tr>
                 <th>Category ID</th>
@@ -137,4 +186,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ?>
         </tbody>
     </table>
-</section>
