@@ -114,6 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $delResult = $boekOverzicht->deleteBoek($boek_id);
 
         echo $delResult > 0 ? "Deletion successful" : "error";
+        header("Refresh: 0; URL='BoekOverzicht.php'");
     }
 
 
