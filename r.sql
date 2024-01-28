@@ -5,6 +5,8 @@ CREATE TABLE users (
     wachtwoord VARCHAR(255),
     tel_nr VARCHAR(10)
 );
+
+
 CREATE TABLE boeken (
     boek_id INT(10) PRIMARY KEY AUTO_INCREMENT,
     status VARCHAR(255),

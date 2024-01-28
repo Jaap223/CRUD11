@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'vendor/autoload.php';
 require_once 'int/db.php';
 require_once 'head/head.php';
@@ -18,8 +19,6 @@ class BoekOverzicht extends Database
             return array();
         }
     }
-
-
 
 
     public function deleteBoek($boek_id)
@@ -52,6 +51,8 @@ class BoekOverzicht extends Database
             return $e->getMessage();
         }
     }
+
+    
 
 
     public function BoekUpdaten($boek_id, $status, $tijd)
@@ -96,9 +97,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
         $result = $updateB->BoekUpdaten($boek_id, $status, $datum, $tijd);
-
+        // Refresh de pagina na 2 seconden
         if ($result > 0) {
             $uMes = 'Boek geupdatet';
+            header("Refresh: 1; URL='BoekOverzicht.php'");
         } else {
             $uMes = 'Boek niet geupdatet';
         }
@@ -114,8 +116,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo $delResult > 0 ? "Deletion successful" : "error";
     }
 
-    if (isset($_POST['boekInvoeren'])) {
 
+    if (isset($_POST['boekInvoeren'])) {
         $status = $_POST['status'];
         $datum = $_POST['datum'];
         $tijd = $_POST['tijd'];
@@ -125,10 +127,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($boeken1 > 0) {
             $mes = "Boek ingevoerd";
+            header("Refresh: 1; URL='BoekOverzicht.php'");
         } else {
             $mes = "Boek niet ingevoerd";
         }
     }
+
 }
 
 
