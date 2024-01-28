@@ -25,8 +25,6 @@ class Product extends Database
         }
     }
 
-
-
     public function deleteProduct($product_id)
     {
         try {
@@ -42,8 +40,6 @@ class Product extends Database
             throw new Exception("Error deleting product " . $e->getMessage());
         }
     }
-
-
 
     // Laat alle producten zien met de select statement
     public function getProducts()
@@ -171,9 +167,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <label for="stock_quantity">stock_quantity</label>
             <input type="text" name="stock_quantity" id="stock_quantity">
-
-
-
 
             <input type="submit" name="updateProduct" value="updateProduct">
         </form>
